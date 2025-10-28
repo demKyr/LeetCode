@@ -13,7 +13,7 @@ public:
     ListNode* rotateRight(ListNode* head, int k) {
         if(head == nullptr) return head;
 
-        ListNode *dummy = new ListNode;
+        ListNode *dummy = new ListNode(0);
         dummy->next = head;
         int cnt=1;
         while(head->next != nullptr){
@@ -21,7 +21,11 @@ public:
             head = head->next;
         }
 
-        if(k%cnt == 0) return dummy->next;
+        if(k%cnt == 0) {
+            ListNode *returnHead = dummy->next;
+            delete dummy;
+            return returnHead;
+        }
 
         head->next = dummy->next;   // last element points to first
         head = dummy->next;         // reinitialise head
@@ -30,6 +34,8 @@ public:
         dummy->next = head->next;   // dummy points to new last element
         head->next = nullptr;       // new last element points to null
 
-        return dummy->next;
+        ListNode *returnHead = dummy->next;
+        delete dummy;
+        return returnHead;
     }
 };
