@@ -139,6 +139,15 @@ public:
         tail = nullptr;
     }
 
+    ~LRUCache() {
+        ListNode2* curr = head;
+        while (curr != nullptr) {
+            ListNode2* nodeToDelete = curr;
+            curr = curr->next;
+            delete nodeToDelete;
+        }
+    }
+
     int get(int key) {
         if (mp.count(key) == 0) return -1; // Key not found
 
