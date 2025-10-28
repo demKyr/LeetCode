@@ -11,28 +11,25 @@
 class Solution {
 public:
     ListNode* partition(ListNode* head, int x) {
-        ListNode* preheadLess = new ListNode;
-        ListNode* preheadMore = new ListNode;
-        ListNode* tailLess = new ListNode;
-        ListNode* tailMore = new ListNode;
-        while(head != nullptr){
-            if(head->val < x){
+        ListNode* preheadLess = new ListNode(0);
+        ListNode* preheadMore = new ListNode(0);
+        ListNode* tailLess = preheadLess;
+        ListNode* tailMore = preheadMore;
+        while (head != nullptr) {
+            if (head->val < x) {
                 tailLess->next = head;
-                head=head->next;
-                tailLess=tailLess->next;
-                tailLess->next = nullptr;
-                if(preheadLess->next == nullptr)    preheadLess->next=tailLess;
-            }
-            else{
+                tailLess = tailLess->next; 
+            } else {
                 tailMore->next = head;
-                head=head->next;
-                tailMore=tailMore->next;
-                tailMore->next = nullptr;
-                if(preheadMore->next == nullptr)    preheadMore->next=tailMore;
+                tailMore = tailMore->next;
             }
+            head = head->next;
         }
-        if(preheadLess->next == nullptr) return preheadMore->next;
-        tailLess->next = preheadMore->next;
-        return preheadLess->next;
+        tailMore->next = nullptr; 
+        tailLess->next = preheadMore->next; 
+        ListNode* returnHead = preheadLess->next;
+        delete preheadLess;
+        delete preheadMore;
+        return returnHead;
     }
 };
