@@ -15,10 +15,10 @@ public:
         return false;
     }
     bool wordBreak(string s, vector<string>& wordDict) {
-        // MEMOIZATION RECURSIVE SOLUTION WITH UNORDERED_SET (1/2)
-        unordered_set<string> wordSet(wordDict.begin(), wordDict.end());
-        unordered_map<string, bool> memo;
-        return worldBreak_aux(s, wordSet, memo);
+        // // MEMOIZATION RECURSIVE SOLUTION WITH UNORDERED_SET (1/2)
+        // unordered_set<string> wordSet(wordDict.begin(), wordDict.end());
+        // unordered_map<string, bool> memo;
+        // return worldBreak_aux(s, wordSet, memo);
 
         // // NAIVE RECURSIVE SOLUTION WITH LINEAR SEARCH
         // if(s=="") return true;
@@ -29,5 +29,19 @@ public:
         // }
         // return false;
 
+        int n = s.size();
+        unordered_set<string> wordSet(wordDict.begin(), wordDict.end());
+        vector <bool> dp (n);
+        dp[0]=true;
+        for(int i=1;i<=n;i++){
+            dp[i] = false;
+            for(int j=0;j<=i;j++){
+                if(dp[j] && wordSet.count(s.substr(j,i-j))){
+                    dp[i] = true;
+                    continue;
+                }
+            }
+        }
+        return dp[n];
     }
 };
