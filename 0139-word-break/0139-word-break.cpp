@@ -1,19 +1,19 @@
 class Solution {
 public:
-    // AUX FUNCTION FOR MEMOIZATION RECURSIVE SOLUTION WITH UNORDERED_SET (2/2)
-    bool worldBreak_aux(string s, unordered_set<string>& wordSet, unordered_map<string, bool>& memo){
-        if(s=="") return true;
-        if(memo.count(s)) return memo[s];
-        for(int i=s.size(); i>=1; i--){
-            if(wordSet.count(s.substr(0, i)))               // if slice of s[0:i] is in unordered_set
-                if(worldBreak_aux(s.substr(i), wordSet, memo)){    // feed slice s[i:] to recursive function
-                    memo[s] = true;
-                    return true;
-                }
-        }   
-        memo[s] = false;
-        return false;
-    }
+    // // AUX FUNCTION FOR MEMOIZATION RECURSIVE SOLUTION WITH UNORDERED_SET (2/2)
+    // bool worldBreak_aux(string s, unordered_set<string>& wordSet, unordered_map<string, bool>& memo){
+    //     if(s=="") return true;
+    //     if(memo.count(s)) return memo[s];
+    //     for(int i=s.size(); i>=1; i--){
+    //         if(wordSet.count(s.substr(0, i)))               // if slice of s[0:i] is in unordered_set
+    //             if(worldBreak_aux(s.substr(i), wordSet, memo)){    // feed slice s[i:] to recursive function
+    //                 memo[s] = true;
+    //                 return true;
+    //             }
+    //     }   
+    //     memo[s] = false;
+    //     return false;
+    // }
     bool wordBreak(string s, vector<string>& wordDict) {
         // // MEMOIZATION RECURSIVE SOLUTION WITH UNORDERED_SET (1/2)
         // unordered_set<string> wordSet(wordDict.begin(), wordDict.end());
