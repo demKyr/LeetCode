@@ -22,18 +22,12 @@ public:
         while(left<=right){
             int mid = left + (right-left)/2;
             // two individual binary searches, one on each split
-            if(nums[mid]>nums[mid+1]){
-                cout<<"split on "<<mid<<endl;
+            if(nums[mid]>nums[mid+1])
                 return(max(man_binary_search(nums, 0, mid, target), man_binary_search(nums, mid+1, nums.size()-1, target)));
-            }
-            else if(nums[0] > nums[mid]){
-                cout<<"go left";
+            else if(nums[0] > nums[mid])
                 right = mid-1;
-            }
-            else{
-                cout<<"go right";
+            else
                 left = mid+1;
-            }
         }   
         return -1;   
     }
